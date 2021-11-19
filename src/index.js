@@ -6,7 +6,7 @@ import store from './store'
 
 store.subscribe(() => {
   const storeNow = store.getState()
-  storeNow.sort((a, b) => b.votes - a.votes)
+  storeNow.anecdotes.sort((a, b) => b.votes - a.votes)
 })
 
 ReactDOM.render(
