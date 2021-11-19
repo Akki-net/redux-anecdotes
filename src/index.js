@@ -7,6 +7,11 @@ import reducer from './reducers/anecdoteReducer'
 
 const store = createStore(reducer)
 
+store.subscribe(() => {
+  const storeNow = store.getState()
+  storeNow.sort((a, b) => b.votes - a.votes)
+})
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
