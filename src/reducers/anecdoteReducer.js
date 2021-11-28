@@ -30,13 +30,16 @@ export const createVote = id => {
 }
 
 export const createNew = anec => {
-  return {
-    type: 'NEW_ANEC',
-    data: {
-      content: anec.content,
-      votes: anec.votes,
-      id: anec.id
-    }
+  return async dispatch => {
+    const newAnec = await anecServices.create(anec)
+    dispatch({
+      type: 'NEW_ANEC',
+      data: {
+        content: newAnec.content,
+        votes: newAnec.votes,
+        id: newAnec.id
+      }
+    })
   }
 }
 

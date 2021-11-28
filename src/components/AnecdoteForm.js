@@ -11,12 +11,7 @@ const AnecdoteForm = () => {
         event.preventDefault()
         const anec = event.target.anecdotes.value
         event.target.anecdotes.value = ''
-        const myAnec = {
-            content: anec,
-            votes: 0
-        }
-        const newAnec = await anecServices.create(myAnec)
-        dispatch(createNew(newAnec))
+        dispatch(createNew(anec))
         dispatch(addNotification('MY_ANEC', anec))
     }
 

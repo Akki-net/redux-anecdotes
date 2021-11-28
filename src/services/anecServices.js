@@ -6,7 +6,11 @@ const getAll = async () => {
     return response.data
 }
 
-const create = async newObj => {
+const create = async anec => {
+    const newObj = {
+        content: anec,
+        votes: 0
+    }
     const response = await axios.post(baseURL, newObj)
     return response.data
 }
