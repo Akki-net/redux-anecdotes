@@ -10,9 +10,8 @@ import { useDispatch } from 'react-redux'
 const App = () => {
   const dispatch = useDispatch()
 
-  useEffect(async () => {
-    const result = await anecServices.getAll()
-    dispatch(intializeAnec(result))
+  useEffect(() => {
+    dispatch(intializeAnec())
   }, [dispatch])
 
   return (

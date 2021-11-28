@@ -1,3 +1,4 @@
+import anecServices from '../services/anecServices'
 
 const asObject = (anecdote) => {
   return {
@@ -7,14 +8,14 @@ const asObject = (anecdote) => {
 }
 
 const reducer = (state = [], action) => {
-  switch(action.type){
-    case 'NEW_VOTE': 
+  switch (action.type) {
+    case 'NEW_VOTE':
       return addVote(state, action.data.id)
 
     case 'NEW_ANEC':
       return [...state, action.data]
 
-    case 'INIT_ANEC': 
+    case 'INIT_ANEC':
       return action.data
   }
 
@@ -31,7 +32,7 @@ export const createVote = id => {
 export const createNew = anec => {
   return {
     type: 'NEW_ANEC',
-    data: { 
+    data: {
       content: anec.content,
       votes: anec.votes,
       id: anec.id
@@ -39,19 +40,22 @@ export const createNew = anec => {
   }
 }
 
-const addVote = (state = [] , id) => {
+const addVote = (state = [], id) => {
   const anec = state.find(s => s.id === id)
   const obj = {
     ...anec,
-    votes : anec.votes + 1
+    votes: anec.votes + 1
   }
   return state.map(s => s.id === id ? obj : s)
 }
 
-export const intializeAnec = anecs => {
-  return {
-    type: 'INIT_ANEC',
-    data: anecs
+export const intializeAnec = () => {
+  return async dispatch => {
+    const anecs = await anecServices.getAll()
+    dispatch({
+      type: 'INIT_ANEC',
+      data: anecs
+    })
   }
 }
 
